@@ -1,5 +1,6 @@
 from aws_cdk import (
     aws_s3 as _s3,
+    aws_iam as _iam,
     core
 )
 
@@ -15,15 +16,29 @@ class MyFirstCdkProjectStack(core.Stack):
             self,
             "myBucketId",
             bucket_name="my-first-cdk-project-2022-10-14",
-            versioned=True,
-            encryption=_s3.BucketEncryption.KMS_MANAGED,
+            versioned=False,
+            encryption=_s3.BucketEncryption.S3_MANAGED,
+            block_public_access=_s3.BlockPublicAccess.BLOCK_ALL
             
-
-
         )
 
-        # example resource
-        # queue = sqs.Queue(
-        #     self, "MyFirstCdkProjectQueue",
-        #     visibility_timeout=Duration.seconds(300),
-        # )
+        mybucket = _s3.Bucket(
+            self,
+            "myBucketId1"
+        )
+        
+        _iam.Group(
+            self,
+            "gid"
+        )
+
+
+
+
+        output_1 = core.CfnOutput(
+            self,
+            "myBucketOutput1",
+            value=mybucket.bucket_name,
+            description=f"My first CDK Bucket",
+            export_name="myBucketOutput1"
+        )
