@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
-import os
-
-import aws_cdk as cdk
+from aws_cdk import core
 
 from my_first_cdk_project.my_first_cdk_project_stack import MyFirstCdkProjectStack
 
 
-app = cdk.App()
-MyFirstCdkProjectStack(app, "MyFirstCdkProjectStack",
+app = core.App()
+MyFirstCdkProjectStack(app, "my-first-cdk-project")
     # If you don't specify 'env', this stack will be environment-agnostic.
     # Account/Region-dependent features and context lookups will not work,
     # but a single synthesized template can be deployed anywhere.
@@ -23,6 +21,6 @@ MyFirstCdkProjectStack(app, "MyFirstCdkProjectStack",
     #env=cdk.Environment(account='123456789012', region='us-east-1'),
 
     # For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
-    )
+    
 
 app.synth()
